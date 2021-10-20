@@ -33,6 +33,13 @@
   font-size: 0.95rem;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   .nav {
     padding: 0 2rem;

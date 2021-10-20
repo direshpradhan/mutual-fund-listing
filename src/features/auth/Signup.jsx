@@ -7,15 +7,11 @@ import {
   Radio,
   Button,
   Typography,
+  Container,
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-// import {
-//   KeyboardDatePicker,
-//   MuiPickersUtilsProvider,
-// } from "@material-ui/pickers";
-// import DateFnsUtils from "@date-io/date-fns";
 import { useForm } from "react-hook-form";
 import { signupUser } from "./authSlice";
 
@@ -80,25 +76,6 @@ export const Signup = () => {
           className="input"
           {...register("password", { required: true })}
         />
-        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Controller
-              render={(props) => (
-                <KeyboardDatePicker
-                  disableToolBar
-                  variant="inline"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  label="Date of Birth"
-                  value={props.value}
-                  onChange={props.onChange}
-                  fullWidth
-                />
-              )}
-              name="dob"
-              control={control}
-              defaultValue={null}
-            />
-          </MuiPickersUtilsProvider> */}
 
         <FormControl component="fieldset" className="input">
           <FormLabel component="legend">Gender</FormLabel>
@@ -124,7 +101,14 @@ export const Signup = () => {
           {authStatus === "loading" ? "Signing up.." : "Signup"}
         </Button>
       </form>
-      {/* </Grid> */}
+      <Container
+        maxWidth="xs"
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        <Button onClick={() => navigate("/login")}>
+          Have an account? Login
+        </Button>
+      </Container>
     </>
   );
 };

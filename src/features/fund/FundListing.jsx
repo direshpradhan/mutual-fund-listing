@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 
 export const FundListing = () => {
   const { funds } = useSelector((state) => state.funds);
-  console.log(funds);
+  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    !token && navigate("/login");
+  }, [token, navigate]);
 
   return (
     <>

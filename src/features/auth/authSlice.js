@@ -38,6 +38,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logoutUser: (state) => {
+      console.log(state);
       localStorage?.removeItem("login");
       state.token = null;
       state.authStatus = "idle";

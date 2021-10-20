@@ -2,22 +2,22 @@ import { Chip, CircularProgress, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 export const FundDetails = () => {
   const { fundId } = useParams();
   const { funds } = useSelector((state) => state.funds);
   const fund = funds.find((fund) => fund.meta.scheme_code === Number(fundId));
   const [historicData, setHistoricData] = useState([]);
-  console.log(historicData);
-
-  //   const useStyles = makeStyles();
+  const { token } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fund &&
       historicData.length === 0 &&
       setHistoricData([...fund.data].reverse());
-  }, [fund, historicData]);
+    !token && navigate("/login");
+  }, [fund, historicData, token, navigate]);
   return (
     <>
       <Container maxWidth="md" sx={{ marginTop: "2rem" }}>

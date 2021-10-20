@@ -7,6 +7,7 @@ import { getMutualFundData } from "./features/fund/fundSlice";
 import { useDispatch } from "react-redux";
 import { Navbar } from "./components/Navbar";
 import { Signup } from "./features/auth/Signup";
+import { Login } from "./features/auth/Login";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,9 +20,9 @@ function App() {
     <div className="">
       <Navbar />
       <Routes>
-        <Route path="/login" element={<h2>Login Page</h2>} />
         <Route path="/" element={<FundListing />} />
         <Route path="/fund/:fundId" element={<FundDetails />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>

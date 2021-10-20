@@ -5,6 +5,7 @@ import { FundListing } from "./features/fund/FundListing";
 import { FundDetails } from "./features/fund/FundDetails";
 import { getMutualFundData } from "./features/fund/fundSlice";
 import { useDispatch } from "react-redux";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <div className="">
+      <Navbar />
       <Routes>
         <Route path="/login" element={<h2>Login Page</h2>} />
         <Route path="/" element={<FundListing />} />

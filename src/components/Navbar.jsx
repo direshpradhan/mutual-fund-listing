@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import { logoutUser } from "../features/auth/authSlice";
 import styles from "./Navbar.module.css";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { useNavigate } from "react-router";
 
 export const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <>
       <nav className={`${styles.nav} `}>
@@ -24,7 +26,10 @@ export const Navbar = () => {
             >
               Logout
             </Button>
-            <AccountCircleOutlinedIcon fontSize="large" />
+            <AccountCircleOutlinedIcon
+              onClick={() => navigate("/user")}
+              fontSize="large"
+            />
           </div>
         )}
       </nav>

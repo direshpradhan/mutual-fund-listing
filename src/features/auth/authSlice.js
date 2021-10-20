@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loginService } from "../../services/Login.services";
 import { signupService } from "../../services/Signup.services";
+import { updateUserDataService } from "../../services/User.services";
 
 const initialState = {
   token: JSON.parse(localStorage?.getItem("login"))?.token || null,
@@ -33,12 +34,23 @@ export const signupUser = createAsyncThunk(
   }
 );
 
+export const updateUserData = createAsyncThunk(
+  "auth/signupUser",
+  async (userDetails, { rejectWithValue }) => {
+    try {
+      const response = await updateUserDataService(userDetails);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     logoutUser: (state) => {
-      console.log(state);
       localStorage?.removeItem("login");
       state.token = null;
       state.authStatus = "idle";
@@ -76,6 +88,21 @@ export const authSlice = createSlice({
       );
     },
     [signupUser.rejected]: (state, action) => {
+      state.error = action.payload.message;
+      state.authStatus = "error";
+    },
+    [updateUserData.pending]: (state) => {
+      state.authStatus = "loading";
+    },
+    [updateUserData.fulfilled]: (state, action) => {
+      state.authStatus = "fulfilled";
+      state.user = action.payload.user;
+      const retrievedString = localStorage.getItem("login");
+      const parsedObject = JSON.parse(retrievedString);
+      parsedObject.user = state.user;
+      localStorage?.setItem("login", JSON.stringify(parsedObject));
+    },
+    [updateUserData.rejected]: (state, action) => {
       state.error = action.payload.message;
       state.authStatus = "error";
     },

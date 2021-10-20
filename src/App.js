@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { Navbar } from "./components/Navbar";
 import { Signup } from "./features/auth/Signup";
 import { Login } from "./features/auth/Login";
+import { UserProfile } from "./features/auth/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function App() {
         <Route path="/fund/:fundId" element={<FundDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/user" element={<UserProfile />} />
       </Routes>
     </div>
   );

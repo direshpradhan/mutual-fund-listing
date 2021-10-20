@@ -64,7 +64,7 @@ export const Login = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          margin: "0.5rem",
+          marginTop: "0.5rem",
         }}
       >
         <Typography variant="body1" sx={{ marginRight: "1rem" }}>
@@ -73,10 +73,9 @@ export const Login = () => {
         <Button
           variant="contained"
           className="input"
-          sx={{ marginRight: "1rem" }}
           onClick={() =>
             dispatch(
-              loginUser({ email: "test@test.com", password: "test@123" })
+              loginUser({ email: "diresh@test.com", password: "diresh@123" })
             )
           }
         >

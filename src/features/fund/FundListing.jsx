@@ -1,24 +1,19 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { useSelector } from "react-redux";
-import { getMutualFundData } from "./fundSlice";
 import { Container, Typography } from "@mui/material";
+import { useNavigate } from "react-router";
 
 export const FundListing = () => {
   const { funds } = useSelector((state) => state.funds);
   console.log(funds);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getMutualFundData());
-  }, [dispatch]);
+  const navigate = useNavigate();
 
   return (
     <div>
       <h3>Fund Listing</h3>
       <Container maxWidth="xs">
         {funds.map((fund) => {
-          const {  meta } = fund;
+          const { meta } = fund;
           return (
             <Container
               key={meta.scheme_code}
@@ -28,6 +23,7 @@ export const FundListing = () => {
                 padding: "1rem",
                 cursor: "pointer",
               }}
+              onClick={() => navigate(`/fund/${meta.scheme_code}`)}
             >
               <Typography variant="body1" sx={{}}>
                 {meta.scheme_name}
